@@ -24,6 +24,10 @@ import com.prueba.geeks.dto.ResponseAPI;
 import com.prueba.geeks.dto.SegmentoDTO;
 import com.prueba.geeks.service.InformeService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/informe")
@@ -34,7 +38,16 @@ public class InformeController {
 	@Autowired
 	private InformeService informeService;
 
-
+	@ApiOperation(
+	        value = "Obtener cantidad de empleados dentro de los siguientes segmentos de "
+	        		+ "sueldo: <br />"
+	        		+ " SEGMENTO A: menor a USD 3.500,"
+	        		+ " SEGMENTO B: mayor o igual a USD 3.500 y menor que USD 8.000,"
+	        		+ " SEGMENTO C: mayor o igual a USD 8.000.",
+	        notes = "Retorna 404 si no ha retornado nada" )
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio1")
 	public ResponseEntity<?> getEjercicio1(@RequestParam(value ="segmento") String tipoSegmento, 
 			@RequestParam(value ="mayorA", required=false, defaultValue = "0") long mayorA,
@@ -54,6 +67,16 @@ public class InformeController {
 
 	}
 	
+	@ApiOperation(
+	        value = "Utilizando la tabla “departments” se requiere realizar la misma agrupación \r\n"
+	        		+ "de segmentos de sueldo, pero por departamento: \r\n"
+	        		+ "  SEGMENTO A: menor a USD 3.500,\r\n"
+	        		+ "  SEGMENTO B: mayor o igual a USD 3.500 y menor que USD 8.000,\r\n"
+	        		+ "  SEGMENTO C: mayor o igual a USD 8.000.",
+	        notes = "Retorna 404 si no ha retornado nada")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio2")
 	public ResponseEntity<?> getEjercicio2(@RequestParam(value ="segmento") String tipoSegmento, 
 			@RequestParam(value ="mayorA", required=false, defaultValue = "0") long mayorA,
@@ -73,6 +96,12 @@ public class InformeController {
 
 	}
 	
+	@ApiOperation(
+	        value = "Información del empleado con mayor sueldo de cada departamento.",
+	        notes = "Retorna 404 si no ha retornado nada")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio3")
 	public ResponseEntity<?> listEjercicio3() {
 		
@@ -84,6 +113,13 @@ public class InformeController {
 
 	}
 	
+	@ApiOperation(
+	        value = "Información de los gerentes que hayan sido contratados hace más de 15\r\n"
+	        		+ "años.",
+	        notes = "Retorna 404 si no ha retornado nada")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio4")
 	public ResponseEntity<?> listEjercicio4(@RequestParam(value ="antiguedad") long antiguedad) {
 		
@@ -95,6 +131,13 @@ public class InformeController {
 
 	}
 	
+	@ApiOperation(
+	        value = "Salario promedio de todos los departamentos que tengan más de 10\r\n"
+	        		+ "empleados.\r\n",
+	        notes = "Retorna 404 si no ha retornado nada")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio5")
 	public ResponseEntity<?> listEjercicio5(@RequestParam(value ="cantidad") long cantidad) {
 		
@@ -106,6 +149,14 @@ public class InformeController {
 
 	}
 	
+	@ApiOperation(
+	        value = "Obtener la siguiente información agrupada por país: cantidad empleados,\r\n"
+	        		+ "salario promedio, salario más alto, salario más bajo, promedio años\r\n"
+	        		+ "antigüedad\r\n",
+	        notes = "Retorna 404 si no ha retornado nada")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Registro encontrado"),
+	        @ApiResponse(code = 404, message = "Registro no encontrado")})
 	@GetMapping(value = "/get/ejercicio6")
 	public ResponseEntity<?> listEjercicio6() {
 		
